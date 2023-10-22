@@ -12,13 +12,19 @@ public class laboratorio5 {
         mostrarEjercito(ejercito2);
         mostrarTablero(tablero, ejercito1, ejercito2);
 
-        System.out.println("Soldado con mayor vida: " + mayorVidaSoldado(ejercito1).getNombre());
-        System.out.println("Promedio de nivel de vida: " + promedioDeVida(ejercito1));
-        System.out.println("El nivel de vida del ejercito es: " + nivelDeVidaEjercito(ejercito1));
-        System.out.println("Ordenamiento Burbuja:");
-        ordenamientoBurbujaVida(ejercito1);
-        System.out.println("Ordenamiento Seleccion");
-        ordenamientoSeleccionVida(ejercito1);
+        System.out.println("Ejercito 1");
+        mostrarDatos(ejercito1);
+        System.out.println("Ejercito 2");
+        mostrarDatos(ejercito2);
+
+        while (true) {
+            System.out.println("Indique las coordenadas de ");
+        }
+    }
+    public static void mostrarDatos(Soldado[] ejercito) {
+        System.out.println("Soldado con mayor vida: " + mayorVidaSoldado(ejercito).getNombre());
+        System.out.println("Promedio de nivel de vida: " + promedioDeVida(ejercito));
+        System.out.println("El nivel de vida del ejercito es: " + nivelDeVidaEjercito(ejercito));    
     }
     public static void ordenamientoBurbujaVida(Soldado[] ejercito) {
         Soldado aux;
@@ -110,9 +116,6 @@ public class laboratorio5 {
         return false;
     }
     public static void mostrarTablero(Soldado[][] tablero, Soldado[] ejercito1, Soldado[] ejercito2) {
-        String colorRojo = "\u001B[31m";
-        String resetColor = "\u001b[0m";
-        String colorAzul = "\u001B[34m";
         System.out.print("\t");
         for (int i = 0; i < tablero.length; i++) {
             System.out.print("   " + (char)(65 + i) + "  ");
@@ -122,7 +125,11 @@ public class laboratorio5 {
             System.out.print("   " + (i + 1) + "\t|");
             for (int j = 0; j < tablero[i].length; j++) {
                 if(tablero[i][j] != null){
-                    System.out.print(perteneceA(ejercito1, tablero[i][j]));
+                    if (perteneceA(ejercito1, tablero[i][j])) {
+                        System.out.print("_s1__|");
+                    } else {
+                        System.out.print("_s2__|");
+                    }
                 }else {
                     System.out.print("_____|");
                 }
@@ -130,13 +137,10 @@ public class laboratorio5 {
             System.out.println();
         }
     }
-    public static void color(String equipo) {    
-        System.out.print("_s" + equipo + "__|");
-    }
     public static boolean perteneceA(Soldado[] ejercito, Soldado soldado) {
         for (int i = 0; i < ejercito.length; i++) {
             if (soldado.getColumna() == ejercito[i].getColumna() &&
-                soldado.getFila() == ejercito[i].getColumna()) {
+                soldado.getFila() == ejercito[i].getFila()) {
                 return true;
             }
         }
@@ -148,3 +152,4 @@ public class laboratorio5 {
         }
     }
 }
+
