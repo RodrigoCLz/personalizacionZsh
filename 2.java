@@ -4,8 +4,8 @@ public class Soldado {
     private int nivelDefensa;
     private int nivelDeVida;
     private int vidaActual;
-    private int velocidad;
-    private int actitud;
+    private int velocidad = 0;
+    private String actitud = "";
     private int fila;
     private int columna;
 
@@ -46,10 +46,29 @@ public class Soldado {
         this.fila = fila;
     }
     public String toString() {
-        return getNombre() + "\t|fila " + getFila() + "\t|col " + getColumna() + "\t|nvida " + getNivelDeVida();  
+        return getNombre() + "\t|fila " + (getFila() + 1) + "\t|col " + (getColumna() + 1) + "\t|nvida " + getNivelDeVida();  
     }
-    public void Marca() {
-        
+    public void avanzar() {
+        velocidad++;
     }
-    
+    public void defender() {
+        velocidad = 0;
+    }
+    public void huir() {
+        velocidad += 2;
+    }
+    public void retroceder() {
+        if (velocidad > 0) {
+            velocidad = 0;
+            actitud = "pasiva";
+        }else if (velocidad == 0){
+            velocidad--;
+        }
+    }
+    public void setAtacado() {
+        nivelDeVida--;
+    }
+    public void morir() {
+        nivelDeVida = 0;
+    }
 }
